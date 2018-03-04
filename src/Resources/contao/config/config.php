@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2017 Jonny Spitzner
+ * Copyright (c) 2005-2018 Jonny Spitzner
  *
  * @license LGPL-3.0+
  */
