@@ -1,0 +1,3 @@
+<script>
+<?php echo($this->cookieconsent); ?>
+</script>

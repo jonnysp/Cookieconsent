@@ -8,8 +8,15 @@
  * @license LGPL-3.0+
  */
 
-array_insert($GLOBALS['BE_MOD']['cookieconsent'], 100, array
+array_insert($GLOBALS['BE_MOD']['content'], 100, array
 (
 	'cookieconsent'	=> array('tables' => array('tl_cookieconsent'))
 ));
 
+array_insert($GLOBALS['FE_MOD'], 2, array
+(
+	'miscellaneous' => array
+	(
+		'cookieconsent'    => 'ModuleCookieconsent'
+	)
+));
