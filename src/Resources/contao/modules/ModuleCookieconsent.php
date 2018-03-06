@@ -20,13 +20,14 @@ class ModuleCookieconsent extends Module {
 		$GLOBALS['TL_JAVASCRIPT'][] = 'bundles/jonnyspcookieconsent/cookieconsent.min.js';
 		$GLOBALS['TL_CSS'][] = 		  'bundles/jonnyspcookieconsent/cookieconsent.min.css';
 
-		$config = '';
+		$script = '';
 
 		$cookieconsent = \CookieconsentModel::findByPK($this->cookieconsent);
 
 		$settings['position']  = $cookieconsent->position;
 		$settings['theme']  = $cookieconsent->theme;
 		$settings['type']  = $cookieconsent->type;
+		$settings['enabled']  = boolval($cookieconsent->type);
 
 
 
@@ -111,76 +112,23 @@ class ModuleCookieconsent extends Module {
 
 		$settings['content']['close'] = $cookieconsent->contentclose;
 
-
+		//other
 
 		$settings['static']=boolval($cookieconsent->static);
 		$settings['revokable']=boolval($cookieconsent->revokable);
+		$settings['animateRevokable']=boolval($cookieconsent->animateRevokable);
+		$settings['location']=boolval($cookieconsent->location);
+		$settings['law']['regionalLaw']=boolval($cookieconsent->regionalLaw);
 
 
 
-
-
-		$config .= 'window.addEventListener("load", function(){	window.cookieconsent.initialise(';
-		$config .= json_encode($settings);
-		$config .= ')});';
+		$script .= 'window.addEventListener("load", function(){	window.cookieconsent.initialise(';
+		$script .= json_encode($settings);
+		$script .= ')});';
 
 
 
-//		$config .= '$("'.html_entity_decode($vegas->target).'").vegas(';
-//			$slides['preload'] = boolval($vegas->preload);
-//			$slides['timer'] = boolval($vegas->timer);
-//			$slides['autoplay'] = boolval($vegas->autoplay);
-//			$slides['delay'] = (int)$vegas->delay;
-//			$slides['loop']=boolval($vegas->looop);
-//			$slides['shuffle'] = boolval($vegas->shuffle);
-//			$slides['transition'] = $vegas->transition;
-//			$slides['animation'] = $vegas->animation;
-//			$slides['align'] = $vegas->align;
-//			$slides['valign'] = $vegas->valign;
-//			$slides['cover'] = ($vegas->cover =='true' || $vegas->cover == 'false') ? boolval($vegas->cover) : $vegas->cover ;
-//			$slides['transitionDuration'] = (is_numeric($vegas->transitionDuration)) ? intval($vegas->transitionDuration) : $vegas->transitionDuration;
-//			$slides['animationDuration'] = (is_numeric($vegas->animationDuration)) ? intval($vegas->animationDuration) : $vegas->animationDuration;
-//			
-//			if($vegas->firstTransition <> ''){
-//				$slides['firstTransition'] = (is_numeric($vegas->firstTransition)) ? intval($vegas->firstTransition) : $vegas->firstTransition;
-//			}
-//
-//			if($vegas->firstTransitionDuration <> ''){
-//				$slides['firstTransitionDuration'] = (is_numeric($vegas->firstTransitionDuration)) ? intval($vegas->firstTransitionDuration) : $vegas->firstTransitionDuration;
-//			}
-//
-//			if($vegas->color <> ''){
-//				$slides['color'] = '#'.$vegas->color;
-//			}
-//
-//			if($vegas->overlay <> ''){
-//				$slides['overlay']= \Environment::get('base').'bundles/jonnyspvegas/vegas/overlays/'.$vegas->overlay.'.png';
-//			}
-//
-//			$images = \VegasSlidesModel::findBy(array('pid=?', 'published=?'),array($vegas->id, '1'),array('order'=>'sorting ASC'));
-//			if (isset($images)){
-//				foreach ($images as $key => $value) {
-//
-//					$slide['src'] = \Environment::get('base').\FilesModel::findByPk($value->src)->path;
-//					$slide['align'] = $value->align;
-//					$slide['valign'] = $value->valign;
-//					if($value->transition <> ''){
-//						$slide['transition'] = $value->transition;
-//					}
-//					if($value->animation <> ''){
-//						$slide['animation'] = $value->animation;
-//					}
-//
-//					$slides['slides'][] = $slide;
-//					unset($slide);
-//				}
-//			}
-//			$config .= json_encode($slides);
-//			unset($slides);
-//		
-//		$config .='	);';
-//
-		$this->Template->cookieconsent = $config;
+		$this->Template->cookieconsent = $script;
 
 	}
 }

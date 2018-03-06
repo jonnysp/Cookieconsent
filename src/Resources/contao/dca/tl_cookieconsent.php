@@ -70,6 +70,19 @@ $GLOBALS['TL_DCA']['tl_cookieconsent'] = array
 				'href'                => 'act=delete',
 				'icon'                => 'delete.svg',
 				'attributes'          => 'onclick="if(!confirm(\'' . $GLOBALS['TL_LANG']['MSC']['deleteConfirm'] . '\'))return false;Backend.getScrollOffset()"'
+			),
+			'show' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_cookieconsent']['show'],
+				'href'                => 'act=show',
+				'icon'                => 'show.svg'
+			),
+			'toggle' => array
+			(
+				'label'               => &$GLOBALS['TL_LANG']['tl_cookieconsent']['toggle'],
+				'icon'                => 'visible.svg',
+				'attributes'          => 'onclick="Backend.getScrollOffset();return AjaxRequest.toggleVisibility(this,%s)"',
+				'button_callback'     => array('tl_cookieconsent', 'toggleIcon')
 			)
 		)
 	),
@@ -78,8 +91,8 @@ $GLOBALS['TL_DCA']['tl_cookieconsent'] = array
 	'palettes' => array
 	(
 		'__selector__'  => array('palette','showLink'),
-		'default'       => '{title_legend},title,type,position,theme;{colors},palette;{content},contentmessage,contentdismiss,contentallow,contentdeny,contentclose;{link},showLink;{settings},revokable,static;',
-		'user'          => '{title_legend},title,type,position,theme;{colors},palette,popupbackground,popuptext,buttonbackground,buttontext,buttonborder;{content},contentmessage,contentdismiss,contentallow,contentdeny,contentclose;{link},showLink;{settings},revokable,static;'
+		'default'       => '{title_legend},title,enabled,type,position,theme;{colors},palette;{content},contentmessage,contentdismiss,contentallow,contentdeny,contentclose,showLink;{settings},revokable,animateRevokable,static,location,regionalLaw;',
+		'user'          => '{title_legend},title,enabled,type,position,theme;{colors},palette,popupbackground,popuptext,buttonbackground,buttontext,buttonborder;{content},contentmessage,contentdismiss,contentallow,contentdeny,contentclose,showLink;{settings},revokable,animateRevokable,static,location,regionalLaw;'
 	
 	),
 
@@ -110,6 +123,16 @@ $GLOBALS['TL_DCA']['tl_cookieconsent'] = array
 			'eval'                  => array('mandatory'=>true, 'maxlength'=>128, 'tl_class'=>'w100','allowHtml'=>true,'preserveTags'=>true),
 			'sql'            		=> "varchar(128) NOT NULL default ''"
 		),
+
+		'enabled' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_cookieconsent']['enabled'],
+			'inputType'               => 'checkbox',
+			'eval'                    => array('submitOnChange'=>true,'tl_class'=>'w100'),
+			'sql'                     => "char(1) NOT NULL default ''"
+		),
+
+
 
 		'type' => array
 		(
@@ -205,10 +228,10 @@ $GLOBALS['TL_DCA']['tl_cookieconsent'] = array
 		'contentmessage' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_cookieconsent']['contentmessage'],
-			'default'				  => 'This website uses cookies to ensure you get the best experience on our website.',
 			'inputType'               => 'textarea',
-			'eval'                    => array('preserveTags'=>true, 'style'=>'height:120px'),
-			'sql'                     => "text NULL"
+			'eval'                    => array('preserveTags'=>true,'allowHtml'=>true, 'class'=>'monospace', 'rte'=>'ace|html', 'helpwizard'=>true),
+			'explanation'             => 'insertTags',
+			'sql'                     => "mediumtext NULL"
 		),
 		
 		'contentdismiss' => array
@@ -217,7 +240,7 @@ $GLOBALS['TL_DCA']['tl_cookieconsent'] = array
 			'default'				  => 'Got it!',
 			'inputType'               => 'text',
 			'eval'                    => array('maxlength'=>255, 'decodeEntities'=>true, 'tl_class'=>'w50'),
-			'sql'                     => "varchar(255) NOT NULL default 'Got it!'"
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		
 		'contentallow' => array
@@ -226,7 +249,7 @@ $GLOBALS['TL_DCA']['tl_cookieconsent'] = array
 			'default'				  => 'Allow cookies',
 			'inputType'               => 'text',
 			'eval'                    => array('maxlength'=>255, 'decodeEntities'=>true, 'tl_class'=>'w50'),
-			'sql'                     => "varchar(255) NOT NULL default 'Allow cookies'"
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		
 		'contentdeny' => array
@@ -235,7 +258,7 @@ $GLOBALS['TL_DCA']['tl_cookieconsent'] = array
 			'default'				  => 'Decline',
 			'inputType'               => 'text',
 			'eval'                    => array('maxlength'=>255, 'decodeEntities'=>true, 'tl_class'=>'w50'),
-			'sql'                     => "varchar(255) NOT NULL default 'Decline'"
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		
 		'contentclose' => array
@@ -244,7 +267,7 @@ $GLOBALS['TL_DCA']['tl_cookieconsent'] = array
 			'default'				  => '&#x274c;',
 			'inputType'               => 'text',
 			'eval'                    => array('maxlength'=>255, 'decodeEntities'=>false, 'tl_class'=>'w50'),
-			'sql'                     => "varchar(255) NOT NULL default '&#x274c;'"
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 
 		'showLink' => array
@@ -261,7 +284,7 @@ $GLOBALS['TL_DCA']['tl_cookieconsent'] = array
 			'default'				  => 'Learn more',
 			'inputType'               => 'text',
 			'eval'                    => array('maxlength'=>255, 'decodeEntities'=>true, 'tl_class'=>'w50'),
-			'sql'                     => "varchar(255) NOT NULL default 'Learn more'"
+			'sql'                     => "varchar(255) NOT NULL default ''"
 		),
 		
 		'contenthref' => array
@@ -270,7 +293,31 @@ $GLOBALS['TL_DCA']['tl_cookieconsent'] = array
 			'default'				  => 'http://cookiesandyou.com',
 			'inputType'               => 'text',
 			'eval'                    => array('maxlength'=>255, 'decodeEntities'=>true, 'tl_class'=>'w50'),
-			'sql'                     => "varchar(255) NOT NULL default 'http://cookiesandyou.com'"
+			'sql'                     => "varchar(255) NOT NULL default ''"
+		),
+
+		'static' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_cookieconsent']['static'],
+			'inputType'               => 'checkbox',
+			'eval'                    => array('submitOnChange'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
+		),
+
+		'location' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_cookieconsent']['location'],
+			'inputType'               => 'checkbox',
+			'eval'                    => array('submitOnChange'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
+		),
+
+		'regionalLaw' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_cookieconsent']['regionalLaw'],
+			'inputType'               => 'checkbox',
+			'eval'                    => array('submitOnChange'=>true),
+			'sql'                     => "char(1) NOT NULL default ''"
 		),
 
 		'revokable' => array
@@ -281,14 +328,68 @@ $GLOBALS['TL_DCA']['tl_cookieconsent'] = array
 			'sql'                     => "char(1) NOT NULL default ''"
 		),
 
-		'static' => array
+		'animateRevokable' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_cookieconsent']['static'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_cookieconsent']['animateRevokable'],
 			'inputType'               => 'checkbox',
 			'eval'                    => array('submitOnChange'=>true),
 			'sql'                     => "char(1) NOT NULL default ''"
-		)
+		),
+
+
+
+
 	)
 );
 
 
+class tl_cookieconsent extends Backend{
+
+	public function toggleIcon($row, $href, $label, $title, $icon, $attributes)
+	{
+		if (strlen(Input::get('tid')))
+		{
+			$this->toggleVisibility(Input::get('tid'), (Input::get('state') == 1), (@func_get_arg(12) ?: null));
+			$this->redirect($this->getReferer());
+		}
+
+		$href .= '&amp;tid='.$row['id'].'&amp;state='.($row['enabled'] ? '' : 1);
+
+		if (!$row['enabled'])
+		{
+			$icon = 'invisible.gif';
+		}
+
+		return '<a href="'.$this->addToUrl($href).'" title="'.StringUtil::specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ';
+	}
+
+
+	public function toggleVisibility($intId, $blnVisible, DataContainer $dc=null)
+	{
+
+		Input::setGet('id', $intId);
+		Input::setGet('act', 'toggle');
+
+		// Trigger the save_callback
+		if (is_array($GLOBALS['TL_DCA']['tl_cookieconsent']['fields']['enabled']['save_callback']))
+		{
+			foreach ($GLOBALS['TL_DCA']['tl_cookieconsent']['fields']['enabled']['save_callback'] as $callback)
+			{
+				if (is_array($callback))
+				{
+					$this->import($callback[0]);
+					$blnVisible = $this->$callback[0]->$callback[1]($blnVisible, ($dc ?: $this));
+				}
+				elseif (is_callable($callback))
+				{
+					$blnVisible = $callback($blnVisible, ($dc ?: $this));
+				}
+			}
+		}
+
+		// Update the database
+		$this->Database->prepare("UPDATE tl_cookieconsent SET tstamp=". time() .", enabled='" . ($blnVisible ? 1 : '') . "' WHERE id=?")->execute($intId);
+
+	}
+
+}
