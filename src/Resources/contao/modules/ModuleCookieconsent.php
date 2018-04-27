@@ -27,7 +27,7 @@ class ModuleCookieconsent extends Module {
 		$settings['position']  = $cookieconsent->position;
 		$settings['theme']  = $cookieconsent->theme;
 		$settings['type']  = $cookieconsent->type;
-		$settings['enabled']  = boolval($cookieconsent->type);
+		$settings['enabled']  = boolval($cookieconsent->enabled);
 
 
 
