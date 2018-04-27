@@ -91,8 +91,8 @@ $GLOBALS['TL_DCA']['tl_cookieconsent'] = array
 	'palettes' => array
 	(
 		'__selector__'  => array('palette','showLink'),
-		'default'       => '{title_legend},title,enabled,type,position,theme;{colors},palette;{content},contentmessage,contentdismiss,contentallow,contentdeny,contentclose,showLink;{settings},revokable,animateRevokable,static,location,regionalLaw;',
-		'user'          => '{title_legend},title,enabled,type,position,theme;{colors},palette,popupbackground,popuptext,buttonbackground,buttontext,buttonborder;{content},contentmessage,contentdismiss,contentallow,contentdeny,contentclose,showLink;{settings},revokable,animateRevokable,static,location,regionalLaw;'
+		'default'       => '{title_legend},title,enabled,type,position,theme;{colors},palette;{content},contentmessage,contentdismiss,contentallow,contentdeny,contentclose;{link},showLink;{settings},revokable,animateRevokable,static,location,regionalLaw;',
+		'user'          => '{title_legend},title,enabled,type,position,theme;{colors},palette,popupbackground,popuptext,buttonbackground,buttontext,buttonborder;{content},contentmessage,contentdismiss,contentallow,contentdeny,contentclose;{link},showLink;{settings},revokable,animateRevokable,static,location,regionalLaw;'
 	
 	),
 
