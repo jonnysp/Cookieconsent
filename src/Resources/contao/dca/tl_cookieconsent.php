@@ -120,7 +120,7 @@ $GLOBALS['TL_DCA']['tl_cookieconsent'] = array
 			'label'    				=> &$GLOBALS['TL_LANG']['tl_cookieconsent']['title'],
 			'search'              	=> true,
 			'inputType'          	=> 'text',
-			'eval'                  => array('mandatory'=>true, 'maxlength'=>128, 'tl_class'=>'w100','allowHtml'=>true,'preserveTags'=>true),
+			'eval'                  => array('mandatory'=>true, 'maxlength'=>128, 'allowHtml'=>true,'preserveTags'=>true),
 			'sql'            		=> "varchar(128) NOT NULL default ''"
 		),
 
@@ -128,7 +128,7 @@ $GLOBALS['TL_DCA']['tl_cookieconsent'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_cookieconsent']['enabled'],
 			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true,'tl_class'=>'w100'),
+			'eval'                    => array('submitOnChange'=>true),
 			'sql'                     => "char(1) NOT NULL default ''"
 		),
 
@@ -141,7 +141,7 @@ $GLOBALS['TL_DCA']['tl_cookieconsent'] = array
 			'inputType'               => 'select',
 			'options'            	  => array ('info','opt-out', 'opt-in') ,
 			'reference'               => &$GLOBALS['TL_LANG']['tl_cookieconsent'],
-			'eval'                    => array('mandatory'=>false, 'tl_class'=>'w100'),
+			'eval'                    => array('mandatory'=>false),
 			'sql'                     => "varchar(128) NOT NULL default 'info'"
 		),
 
@@ -152,7 +152,7 @@ $GLOBALS['TL_DCA']['tl_cookieconsent'] = array
 			'inputType'               => 'select',
 			'options'            	  => array ('top','top-left', 'top-right','bottom', 'bottom-left', 'bottom-right') ,
 			'reference'               => &$GLOBALS['TL_LANG']['tl_cookieconsent'],
-			'eval'                    => array('mandatory'=>false, 'tl_class'=>'w100'),
+			'eval'                    => array('mandatory'=>false),
 			'sql'                     => "varchar(128) NOT NULL default 'bottom'"
 		),
 		'theme' => array
@@ -162,7 +162,7 @@ $GLOBALS['TL_DCA']['tl_cookieconsent'] = array
 			'inputType'               => 'select',
 			'options'            	  => array ('block','edgeless','classic') ,
 			'reference'               => &$GLOBALS['TL_LANG']['tl_cookieconsent'],
-			'eval'                    => array('mandatory'=>false, 'tl_class'=>'w100'),
+			'eval'                    => array('mandatory'=>false),
 			'sql'                     => "varchar(128) NOT NULL default 'block'"
 		),
 
@@ -173,7 +173,7 @@ $GLOBALS['TL_DCA']['tl_cookieconsent'] = array
 			'inputType'               => 'select',
 			'options'            	  => array ('user','honeybee','blurple','mono','nuclear','cosmo','neon','corporate') ,
 			'reference'               => &$GLOBALS['TL_LANG']['tl_cookieconsent'],
-			'eval'      			  => array('includeBlankOption' => false,'submitOnChange' => true,'mandatory' => true,'tl_class'=> 'w100'),
+			'eval'      			  => array('includeBlankOption' => false,'submitOnChange' => true,'mandatory' => true),
 			'sql'                     => "varchar(128) NOT NULL default 'honeybee'"
 		),
 
@@ -274,7 +274,7 @@ $GLOBALS['TL_DCA']['tl_cookieconsent'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_cookieconsent']['showLink'],
 			'inputType'               => 'checkbox',
-			'eval'                    => array('submitOnChange'=>true,'tl_class'=>'w100'),
+			'eval'                    => array('submitOnChange'=>true),
 			'sql'                     => "char(1) NOT NULL default ''"
 		),
 
