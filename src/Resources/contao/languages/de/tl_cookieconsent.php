@@ -8,12 +8,12 @@ $GLOBALS['TL_LANG']['tl_cookieconsent']['edit']   					= array('Cookieconsent be
 $GLOBALS['TL_LANG']['tl_cookieconsent']['copy']   					= array('Cookieconsent kopieren', 'Cookieconsent ID %s kopieren');
 $GLOBALS['TL_LANG']['tl_cookieconsent']['delete'] 					= array('Cookieconsent löschen','Cookieconsent ID %s löschen');
 
-
 /**
  * Fields
  */
 $GLOBALS['TL_LANG']['tl_cookieconsent']['title']       				= array('Titel', 'Geben Sie hier den Titel ein.');
 $GLOBALS['TL_LANG']['tl_cookieconsent']['type'] 					= array('Typ', 'Wählen sie den Typ aus.');
+$GLOBALS['TL_LANG']['tl_cookieconsent']['layout'] 					= array('Layout','');
 $GLOBALS['TL_LANG']['tl_cookieconsent']['position'] 				= array('Position','');
 $GLOBALS['TL_LANG']['tl_cookieconsent']['theme'] 					= array('Theme','');
 $GLOBALS['TL_LANG']['tl_cookieconsent']['palette'] 					= array('Farbpalette','');
@@ -36,8 +36,21 @@ $GLOBALS['TL_LANG']['tl_cookieconsent']['static'] 					= array('Position fixed',
 $GLOBALS['TL_LANG']['tl_cookieconsent']['location'] 				= array('Standortdienste','Um die grundlegenden Standortdienste zu aktivieren.');
 $GLOBALS['TL_LANG']['tl_cookieconsent']['regionalLaw'] 				= array('Regionales Cookie-Gesetz','');
 
-
-
+$GLOBALS['TL_LANG']['tl_cookieconsent']['elementsheader'] 			= array('Header Template','{{header}}');
+$GLOBALS['TL_LANG']['tl_cookieconsent']['elementsmessage'] 			= array('Message Template','{{message}}');
+$GLOBALS['TL_LANG']['tl_cookieconsent']['elementsmessagelink'] 		= array('Message & Link Template','{{messagelink}}');
+$GLOBALS['TL_LANG']['tl_cookieconsent']['elementsdismiss'] 			= array('Dismiss Button Template','{{dismiss}}');
+$GLOBALS['TL_LANG']['tl_cookieconsent']['elementsallow'] 			= array('Allow Button Template','{{allow}}');
+$GLOBALS['TL_LANG']['tl_cookieconsent']['elementsdeny'] 			= array('Deny Button Template','{{deny}}');
+$GLOBALS['TL_LANG']['tl_cookieconsent']['elementslink'] 			= array('Link Template','{{link}}');
+$GLOBALS['TL_LANG']['tl_cookieconsent']['elementsclose'] 			= array('Close Template','{{close}}');
+$GLOBALS['TL_LANG']['tl_cookieconsent']['complianceinfo'] 			= array('Info Template','{{compliance}} Auswahl erfolgt über Typ.');
+$GLOBALS['TL_LANG']['tl_cookieconsent']['complianceoptin'] 			= array('Opt-In Template','{{compliance}} Auswahl erfolgt über Typ.');
+$GLOBALS['TL_LANG']['tl_cookieconsent']['complianceoptout'] 		= array('Opt-Out Template','{{compliance}} Auswahl erfolgt über Typ.');
+$GLOBALS['TL_LANG']['tl_cookieconsent']['layoutsbasic'] 			= array('Layout Basic Template','Auswahl erfolgt über Layout.');
+$GLOBALS['TL_LANG']['tl_cookieconsent']['layoutsbasicclose'] 		= array('Layout Basic Close Template','Auswahl erfolgt über Layout.');
+$GLOBALS['TL_LANG']['tl_cookieconsent']['layoutsbasicheader'] 		= array('Layout Basic Header Template','Auswahl erfolgt über Layout.');
+$GLOBALS['TL_LANG']['tl_cookieconsent']['window'] 					= array('Template','');
 /**
  * Legends
  */
@@ -45,7 +58,10 @@ $GLOBALS['TL_LANG']['tl_cookieconsent']['title_legend'] 			= 'Grundeinstellungen
 $GLOBALS['TL_LANG']['tl_cookieconsent']['colors'] 					= 'Farbeinstellungen';
 $GLOBALS['TL_LANG']['tl_cookieconsent']['content'] 					= 'Inhalte';
 $GLOBALS['TL_LANG']['tl_cookieconsent']['settings'] 				= 'Sonstiges';
-
+$GLOBALS['TL_LANG']['tl_cookieconsent']['elements'] 				= 'Element Templates';
+$GLOBALS['TL_LANG']['tl_cookieconsent']['compliance'] 				= 'Button Templates';
+$GLOBALS['TL_LANG']['tl_cookieconsent']['layouts'] 					= 'Layout Templates';
+$GLOBALS['TL_LANG']['tl_cookieconsent']['wrapper'] 					= 'Wrapper Template';
 
 /**
  * Options
@@ -60,6 +76,11 @@ $GLOBALS['TL_LANG']['tl_cookieconsent']['top-right'] 				= array('Oben Rechts','
 $GLOBALS['TL_LANG']['tl_cookieconsent']['bottom'] 					= array('Unten','');
 $GLOBALS['TL_LANG']['tl_cookieconsent']['bottom-left'] 				= array('Unten Links','');
 $GLOBALS['TL_LANG']['tl_cookieconsent']['bottom-right'] 			= array('Unten Rechts','');
+
+$GLOBALS['TL_LANG']['tl_cookieconsent']['basic'] 					= array('Basic','');
+$GLOBALS['TL_LANG']['tl_cookieconsent']['basic-close'] 				= array('Basic Close','');
+$GLOBALS['TL_LANG']['tl_cookieconsent']['basic-header'] 			= array('Basic Header','');
+
 
 $GLOBALS['TL_LANG']['tl_cookieconsent']['block'] 					= array('Block','');
 $GLOBALS['TL_LANG']['tl_cookieconsent']['edgeless'] 				= array('Edgeless','');

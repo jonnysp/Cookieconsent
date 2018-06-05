@@ -2,7 +2,7 @@
 
 class ModuleCookieconsent extends Module {
 	
-	protected $strTemplate = 'mod_cookieconsent';
+	protected $strTemplate = '';
 
 	public function generate() {
 		if(TL_MODE == 'BE') {
@@ -27,9 +27,8 @@ class ModuleCookieconsent extends Module {
 		$settings['position']  = $cookieconsent->position;
 		$settings['theme']  = $cookieconsent->theme;
 		$settings['type']  = $cookieconsent->type;
+		$settings['layout']  = $cookieconsent->layout;
 		$settings['enabled']  = boolval($cookieconsent->enabled);
-
-
 
 		if($cookieconsent->palette == 'user'){
 
@@ -96,8 +95,6 @@ class ModuleCookieconsent extends Module {
 
 		}
 
-
-
 		//content
 		$settings['content']['message'] = $cookieconsent->contentmessage;
 		$settings['content']['dismiss'] = $cookieconsent->contentdismiss;
@@ -113,7 +110,6 @@ class ModuleCookieconsent extends Module {
 		$settings['content']['close'] = $cookieconsent->contentclose;
 
 		//other
-
 		$settings['static']=boolval($cookieconsent->static);
 		$settings['revokable']=boolval($cookieconsent->revokable);
 		$settings['animateRevokable']=boolval($cookieconsent->animateRevokable);
@@ -121,14 +117,64 @@ class ModuleCookieconsent extends Module {
 		$settings['law']['regionalLaw']=boolval($cookieconsent->regionalLaw);
 
 
+		//elements
+		if($cookieconsent->elementsheader <> ''){
+			$settings['elements']['header'] = $cookieconsent->elementsheader;
+		}
+		if($cookieconsent->elementsmessage <> ''){
+			$settings['elements']['message'] = $cookieconsent->elementsmessage;
+		}
+		if($cookieconsent->elementsmessagelink <> ''){
+			$settings['elements']['messagelink'] = $cookieconsent->elementsmessagelink;
+		}
+		if($cookieconsent->elementsdismiss <> ''){
+			$settings['elements']['dismiss'] = $cookieconsent->elementsdismiss;
+		}
+		if($cookieconsent->elementsallow <> ''){
+			$settings['elements']['allow'] = $cookieconsent->elementsallow;
+		}
+		if($cookieconsent->elementsdeny <> ''){
+			$settings['elements']['deny'] = $cookieconsent->elementsdeny;
+		}
+		if($cookieconsent->elementslink <> ''){
+			$settings['elements']['link'] = $cookieconsent->elementslink;
+		}
+		if($cookieconsent->elementsclose <> ''){
+			$settings['elements']['close'] = $cookieconsent->elementsclose;
+		}
 
-		$script .= 'window.addEventListener("load", function(){	window.cookieconsent.initialise(';
+		//compliance
+		if($cookieconsent->complianceinfo <> ''){
+			$settings['compliance']['info'] = $cookieconsent->complianceinfo;
+		}
+		if($cookieconsent->complianceoptin <> ''){
+			$settings['compliance']['opt-in'] = $cookieconsent->complianceoptin;
+		}
+		if($cookieconsent->complianceoptout <> ''){
+			$settings['compliance']['opt-out'] = $cookieconsent->complianceoptout;
+		}
+
+		//layout
+		if($cookieconsent->layoutsbasic <> ''){
+			$settings['layouts']['basic'] = $cookieconsent->layoutsbasic;
+		}
+		if($cookieconsent->layoutsbasicclose <> ''){
+			$settings['layouts']['basic-close'] = $cookieconsent->layoutsbasicclose;
+		}
+		if($cookieconsent->layoutsbasicheader <> ''){
+			$settings['layouts']['basic-header'] = $cookieconsent->layoutsbasicheader;
+		}
+
+		//window
+		if($cookieconsent->window <> ''){
+			$settings['window'] = $cookieconsent->window;
+		}
+
+		$script .= '<script>window.addEventListener("load", function(){	window.cookieconsent.initialise(';
 		$script .= json_encode($settings);
-		$script .= ')});';
+		$script .= ')});</script>';
 
-
-
-		$this->Template->cookieconsent = $script;
+		$GLOBALS['TL_BODY'][] = $script;
 
 	}
 }

@@ -91,12 +91,12 @@ $GLOBALS['TL_DCA']['tl_cookieconsent'] = array
 	'palettes' => array
 	(
 		'__selector__'  => array('palette','showLink'),
-		'default'       => '{title_legend},title,enabled,type,position,theme;{colors},palette;{content},contentmessage,contentdismiss,contentallow,contentdeny,contentclose;{link},showLink;{settings},revokable,animateRevokable,static,location,regionalLaw;',
-		'user'          => '{title_legend},title,enabled,type,position,theme;{colors},palette,popupbackground,popuptext,buttonbackground,buttontext,buttonborder;{content},contentmessage,contentdismiss,contentallow,contentdeny,contentclose;{link},showLink;{settings},revokable,animateRevokable,static,location,regionalLaw;'
+		'default'       => '{title_legend},title,enabled,type,layout,position,theme;{colors},palette;{content},contentmessage,contentdismiss,contentallow,contentdeny,contentclose;{link},showLink;{settings},revokable,animateRevokable,static,location,regionalLaw;{elements},elementsheader,elementsmessage,elementsmessagelink,elementsdismiss,elementsallow,elementsdeny,elementslink,elementsclose;{compliance},complianceinfo,complianceoptin,complianceoptout;{layouts},layoutsbasic,layoutsbasicclose,layoutsbasicheader;{wrapper},window',
+		'user'          => '{title_legend},title,enabled,type,layout,position,theme;{colors},palette,popupbackground,popuptext,buttonbackground,buttontext,buttonborder;{content},contentmessage,contentdismiss,contentallow,contentdeny,contentclose;{link},showLink;{settings},revokable,animateRevokable,static,location,regionalLaw;{elements},elementsheader,elementsmessage,elementsmessagelink,elementsdismiss,elementsallow,elementsdeny,elementslink,elementsclose;{compliance},complianceinfo,complianceoptin,complianceoptout;{compliance},layoutsbasic,layoutsbasicclose,layoutsbasicheader;{wrapper},window'
 	
 	),
-
-	// Subpalettes
+  
+  	// Subpalettes
     'subpalettes' => array (
         'showLink'      => 'contentlink,contenthref'
     ),
@@ -145,12 +145,23 @@ $GLOBALS['TL_DCA']['tl_cookieconsent'] = array
 			'sql'                     => "varchar(128) NOT NULL default 'info'"
 		),
 
+		'layout' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_cookieconsent']['layout'],
+			'default'				  => 'basic',
+			'inputType'               => 'select',
+			'options'            	  => array ('basic','basic-close', 'basic-header') ,
+			'reference'               => &$GLOBALS['TL_LANG']['tl_cookieconsent'],
+			'eval'                    => array('mandatory'=>false),
+			'sql'                     => "varchar(128) NOT NULL default 'basic'"
+		),
+
 		'position' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_cookieconsent']['position'],
 			'default'				  => 'bottom',
 			'inputType'               => 'select',
-			'options'            	  => array ('top','top-left', 'top-right','bottom', 'bottom-left', 'bottom-right') ,
+			'options'            	  => array ('top','top-left', 'top-right','bottom', 'bottom-left', 'bottom-right'),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_cookieconsent'],
 			'eval'                    => array('mandatory'=>false),
 			'sql'                     => "varchar(128) NOT NULL default 'bottom'"
@@ -229,8 +240,7 @@ $GLOBALS['TL_DCA']['tl_cookieconsent'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_cookieconsent']['contentmessage'],
 			'inputType'               => 'textarea',
-			'eval'                    => array('preserveTags'=>true,'allowHtml'=>true, 'class'=>'monospace', 'rte'=>'ace|html', 'helpwizard'=>true),
-			'explanation'             => 'insertTags',
+			'eval'                    => array('preserveTags'=>true,'allowHtml'=>true, 'class'=>'monospace', 'rte'=>'ace|html'),
 			'sql'                     => "mediumtext NULL"
 		),
 		
@@ -336,9 +346,141 @@ $GLOBALS['TL_DCA']['tl_cookieconsent'] = array
 			'sql'                     => "char(1) NOT NULL default ''"
 		),
 
+		'elementsheader' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_cookieconsent']['elementsheader'],
+			'default'				  => '<span class="cc-header">{{header}}</span>',
+			'inputType'               => 'textarea',
+			'eval'                    => array('preserveTags'=>true, 'allowHtml'=>true, 'class'=>'monospace', 'rte'=>'ace|html'),
+			'sql'                     => "mediumtext NULL"
+		),
 
+		'elementsmessage' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_cookieconsent']['elementsmessage'],
+			'default'				  => '<span id="cookieconsent:desc" class="cc-message">{{message}}</span>',
+			'inputType'               => 'textarea',
+			'eval'                    => array('preserveTags'=>true, 'allowHtml'=>true, 'class'=>'monospace', 'rte'=>'ace|html'),
+			'sql'                     => "mediumtext NULL"
+		),
 
+		'elementsmessagelink' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_cookieconsent']['elementsmessagelink'],
+			'default'				  => '<span id="cookieconsent:desc" class="cc-message">{{message}} <a aria-label="learn more about cookies" tabindex="0" class="cc-link" href="{{href}}" target="_blank">{{link}}</a></span>',
+			'inputType'               => 'textarea',
+			'eval'                    => array('preserveTags'=>true, 'allowHtml'=>true, 'class'=>'monospace', 'rte'=>'ace|html'),
+			'sql'                     => "mediumtext NULL"
+		),
 
+		'elementsdismiss' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_cookieconsent']['elementsdismiss'],
+			'default'				  => '<a aria-label="dismiss cookie message" tabindex="0" class="cc-btn cc-dismiss">{{dismiss}}</a>',
+			'inputType'               => 'textarea',
+			'eval'                    => array('preserveTags'=>true, 'allowHtml'=>true, 'class'=>'monospace', 'rte'=>'ace|html'),
+			'sql'                     => "mediumtext NULL"
+		),
+
+		'elementsallow' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_cookieconsent']['elementsallow'],
+			'default'				  => '<a aria-label="allow cookies" tabindex="0" class="cc-btn cc-allow">{{allow}}</a>',
+			'inputType'               => 'textarea',
+			'eval'                    => array('preserveTags'=>true, 'allowHtml'=>true, 'class'=>'monospace', 'rte'=>'ace|html'),
+			'sql'                     => "mediumtext NULL"
+		),
+
+		'elementsdeny' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_cookieconsent']['elementsdeny'],
+			'default'				  => '<a aria-label="deny cookies" tabindex="0" class="cc-btn cc-deny">{{deny}}</a>',
+			'inputType'               => 'textarea',
+			'eval'                    => array('preserveTags'=>true, 'allowHtml'=>true, 'class'=>'monospace', 'rte'=>'ace|html'),
+			'sql'                     => "mediumtext NULL"
+		),
+
+		'elementslink' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_cookieconsent']['elementslink'],
+			'default'				  => '<a aria-label="learn more about cookies" tabindex="0" class="cc-link" href="{{href}}" target="_blank">{{link}}</a>',
+			'inputType'               => 'textarea',
+			'eval'                    => array('preserveTags'=>true, 'allowHtml'=>true, 'class'=>'monospace', 'rte'=>'ace|html'),
+			'sql'                     => "mediumtext NULL"
+		),
+
+		'elementsclose' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_cookieconsent']['elementsclose'],
+			'default'				  => '<span aria-label="dismiss cookie message" tabindex="0" class="cc-close">{{close}}</span>',
+			'inputType'               => 'textarea',
+			'eval'                    => array('preserveTags'=>true, 'allowHtml'=>true, 'class'=>'monospace', 'rte'=>'ace|html'),
+			'sql'                     => "mediumtext NULL"
+		),
+
+		'complianceinfo' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_cookieconsent']['complianceinfo'],
+			'default'				  => '<div class="cc-compliance">{{dismiss}}</div>',
+			'inputType'               => 'textarea',
+			'eval'                    => array('preserveTags'=>true, 'allowHtml'=>true, 'class'=>'monospace', 'rte'=>'ace|html'),
+			'sql'                     => "mediumtext NULL"
+		),
+
+		'complianceoptin' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_cookieconsent']['complianceoptin'],
+			'default'				  => '<div class="cc-compliance cc-highlight">{{dismiss}}{{allow}}</div>',
+			'inputType'               => 'textarea',
+			'eval'                    => array('preserveTags'=>true, 'allowHtml'=>true, 'class'=>'monospace', 'rte'=>'ace|html'),
+			'sql'                     => "mediumtext NULL"
+		),
+
+		'complianceoptout' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_cookieconsent']['complianceoptout'],
+			'default'				  => '<div class="cc-compliance cc-highlight">{{deny}}{{dismiss}}</div>',
+			'inputType'               => 'textarea',
+			'eval'                    => array('preserveTags'=>true, 'allowHtml'=>true, 'class'=>'monospace', 'rte'=>'ace|html'),
+			'sql'                     => "mediumtext NULL"
+		),
+
+		'layoutsbasic' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_cookieconsent']['layoutsbasic'],
+			'default'				  => '{{messagelink}}{{compliance}}',
+			'inputType'               => 'textarea',
+			'eval'                    => array('preserveTags'=>true, 'allowHtml'=>true, 'class'=>'monospace', 'rte'=>'ace|html'),
+			'sql'                     => "mediumtext NULL"
+		),
+
+		'layoutsbasicclose' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_cookieconsent']['layoutsbasicclose'],
+			'default'				  => '{{messagelink}}{{compliance}}{{close}}',
+			'inputType'               => 'textarea',
+			'eval'                    => array('preserveTags'=>true, 'allowHtml'=>true, 'class'=>'monospace', 'rte'=>'ace|html'),
+			'sql'                     => "mediumtext NULL"
+		),
+
+		'layoutsbasicheader' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_cookieconsent']['layoutsbasicheader'],
+			'default'				  => '{{header}}{{message}}{{link}}{{compliance}}',
+			'inputType'               => 'textarea',
+			'eval'                    => array('preserveTags'=>true, 'allowHtml'=>true, 'class'=>'monospace', 'rte'=>'ace|html'),
+			'sql'                     => "mediumtext NULL"
+		),
+
+		'window' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_cookieconsent']['window'],
+			'default'				  => '<div role="dialog" aria-label="cookieconsent" aria-describedby="cookieconsent:desc" class="cc-window {{classes}}">{{children}}</div>',
+			'inputType'               => 'textarea',
+			'eval'                    => array('preserveTags'=>true, 'allowHtml'=>true, 'class'=>'monospace', 'rte'=>'ace|html'),
+			'sql'                     => "mediumtext NULL"
+		)
+//revokeBtn
 	)
 );
 
