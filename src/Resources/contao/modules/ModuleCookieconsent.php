@@ -31,7 +31,6 @@ class ModuleCookieconsent extends Module {
 		$settings['enabled']  = boolval($cookieconsent->enabled);
 
 		if($cookieconsent->palette == 'user'){
-
 			//colors
 			if($cookieconsent->popupbackground <> ''){
 				$settings['palette']['popup']['background'] = '#'.$cookieconsent->popupbackground;
@@ -52,7 +51,6 @@ class ModuleCookieconsent extends Module {
 			if($cookieconsent->buttonborder <> ''){
 				$settings['palette']['button']['border'] = '#'.$cookieconsent->buttonborder;
 			}
-
 
 		}elseif($cookieconsent->palette == 'honeybee'){
 
@@ -118,27 +116,39 @@ class ModuleCookieconsent extends Module {
 
 
 		//elements
+
+		if($cookieconsent->revokeBtn <> ''){
+			$settings['revokeBtn'] = $cookieconsent->revokeBtn;
+		}
+
 		if($cookieconsent->elementsheader <> ''){
 			$settings['elements']['header'] = $cookieconsent->elementsheader;
 		}
+
 		if($cookieconsent->elementsmessage <> ''){
 			$settings['elements']['message'] = $cookieconsent->elementsmessage;
 		}
+
 		if($cookieconsent->elementsmessagelink <> ''){
 			$settings['elements']['messagelink'] = $cookieconsent->elementsmessagelink;
 		}
+
 		if($cookieconsent->elementsdismiss <> ''){
 			$settings['elements']['dismiss'] = $cookieconsent->elementsdismiss;
 		}
+
 		if($cookieconsent->elementsallow <> ''){
 			$settings['elements']['allow'] = $cookieconsent->elementsallow;
 		}
+
 		if($cookieconsent->elementsdeny <> ''){
 			$settings['elements']['deny'] = $cookieconsent->elementsdeny;
 		}
+
 		if($cookieconsent->elementslink <> ''){
 			$settings['elements']['link'] = $cookieconsent->elementslink;
 		}
+
 		if($cookieconsent->elementsclose <> ''){
 			$settings['elements']['close'] = $cookieconsent->elementsclose;
 		}
@@ -147,9 +157,11 @@ class ModuleCookieconsent extends Module {
 		if($cookieconsent->complianceinfo <> ''){
 			$settings['compliance']['info'] = $cookieconsent->complianceinfo;
 		}
+
 		if($cookieconsent->complianceoptin <> ''){
 			$settings['compliance']['opt-in'] = $cookieconsent->complianceoptin;
 		}
+
 		if($cookieconsent->complianceoptout <> ''){
 			$settings['compliance']['opt-out'] = $cookieconsent->complianceoptout;
 		}
@@ -158,9 +170,11 @@ class ModuleCookieconsent extends Module {
 		if($cookieconsent->layoutsbasic <> ''){
 			$settings['layouts']['basic'] = $cookieconsent->layoutsbasic;
 		}
+
 		if($cookieconsent->layoutsbasicclose <> ''){
 			$settings['layouts']['basic-close'] = $cookieconsent->layoutsbasicclose;
 		}
+
 		if($cookieconsent->layoutsbasicheader <> ''){
 			$settings['layouts']['basic-header'] = $cookieconsent->layoutsbasicheader;
 		}
@@ -174,8 +188,12 @@ class ModuleCookieconsent extends Module {
 		$script .= json_encode($settings);
 		$script .= ')});</script>';
 
-		$GLOBALS['TL_BODY'][] = $script;
-
+		if($cookieconsent->loadposition == 'loadbottom'){
+			$GLOBALS['TL_BODY'][] = $script; // script on bottom
+		}else{
+			$GLOBALS['TL_HEAD'][] = $script; // script on top
+		}
+		
 	}
 }
 

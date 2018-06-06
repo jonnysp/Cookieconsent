@@ -91,8 +91,8 @@ $GLOBALS['TL_DCA']['tl_cookieconsent'] = array
 	'palettes' => array
 	(
 		'__selector__'  => array('palette','showLink'),
-		'default'       => '{title_legend},title,enabled,type,layout,position,theme;{colors},palette;{content},contentmessage,contentdismiss,contentallow,contentdeny,contentclose;{link},showLink;{settings},revokable,animateRevokable,static,location,regionalLaw;{elements},elementsheader,elementsmessage,elementsmessagelink,elementsdismiss,elementsallow,elementsdeny,elementslink,elementsclose;{compliance},complianceinfo,complianceoptin,complianceoptout;{layouts},layoutsbasic,layoutsbasicclose,layoutsbasicheader;{wrapper},window',
-		'user'          => '{title_legend},title,enabled,type,layout,position,theme;{colors},palette,popupbackground,popuptext,buttonbackground,buttontext,buttonborder;{content},contentmessage,contentdismiss,contentallow,contentdeny,contentclose;{link},showLink;{settings},revokable,animateRevokable,static,location,regionalLaw;{elements},elementsheader,elementsmessage,elementsmessagelink,elementsdismiss,elementsallow,elementsdeny,elementslink,elementsclose;{compliance},complianceinfo,complianceoptin,complianceoptout;{compliance},layoutsbasic,layoutsbasicclose,layoutsbasicheader;{wrapper},window'
+		'default'       => '{title_legend},title,enabled,loadposition,type,layout,position,theme;{colors},palette;{content},contentmessage,contentdismiss,contentallow,contentdeny,contentclose;{link},showLink;{settings},revokable,animateRevokable,static,location,regionalLaw;{elements},revokeBtn,elementsheader,elementsmessage,elementsmessagelink,elementsdismiss,elementsallow,elementsdeny,elementslink,elementsclose;{compliance},complianceinfo,complianceoptin,complianceoptout;{layouts},layoutsbasic,layoutsbasicclose,layoutsbasicheader;{wrapper},window',
+		'user'          => '{title_legend},title,enabled,loadposition,type,layout,position,theme;{colors},palette,popupbackground,popuptext,buttonbackground,buttontext,buttonborder;{content},contentmessage,contentdismiss,contentallow,contentdeny,contentclose;{link},showLink;{settings},revokable,animateRevokable,static,location,regionalLaw;{elements},revokeBtn,elementsheader,elementsmessage,elementsmessagelink,elementsdismiss,elementsallow,elementsdeny,elementslink,elementsclose;{compliance},complianceinfo,complianceoptin,complianceoptout;{compliance},layoutsbasic,layoutsbasicclose,layoutsbasicheader;{wrapper},window'
 	
 	),
   
@@ -132,7 +132,16 @@ $GLOBALS['TL_DCA']['tl_cookieconsent'] = array
 			'sql'                     => "char(1) NOT NULL default ''"
 		),
 
-
+		'loadposition' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_cookieconsent']['loadposition'],
+			'default'				  => 'loadtop',
+			'inputType'               => 'select',
+			'options'            	  => array ('loadtop','loadbottom') ,
+			'reference'               => &$GLOBALS['TL_LANG']['tl_cookieconsent'],
+			'eval'                    => array('mandatory'=>true),
+			'sql'                     => "varchar(128) NOT NULL default 'loadtop'"
+		),
 
 		'type' => array
 		(
@@ -141,7 +150,7 @@ $GLOBALS['TL_DCA']['tl_cookieconsent'] = array
 			'inputType'               => 'select',
 			'options'            	  => array ('info','opt-out', 'opt-in') ,
 			'reference'               => &$GLOBALS['TL_LANG']['tl_cookieconsent'],
-			'eval'                    => array('mandatory'=>false),
+			'eval'                    => array('mandatory'=>true),
 			'sql'                     => "varchar(128) NOT NULL default 'info'"
 		),
 
@@ -152,7 +161,7 @@ $GLOBALS['TL_DCA']['tl_cookieconsent'] = array
 			'inputType'               => 'select',
 			'options'            	  => array ('basic','basic-close', 'basic-header') ,
 			'reference'               => &$GLOBALS['TL_LANG']['tl_cookieconsent'],
-			'eval'                    => array('mandatory'=>false),
+			'eval'                    => array('mandatory'=>true),
 			'sql'                     => "varchar(128) NOT NULL default 'basic'"
 		),
 
@@ -163,9 +172,10 @@ $GLOBALS['TL_DCA']['tl_cookieconsent'] = array
 			'inputType'               => 'select',
 			'options'            	  => array ('top','top-left', 'top-right','bottom', 'bottom-left', 'bottom-right'),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_cookieconsent'],
-			'eval'                    => array('mandatory'=>false),
+			'eval'                    => array('mandatory'=>true),
 			'sql'                     => "varchar(128) NOT NULL default 'bottom'"
 		),
+
 		'theme' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_cookieconsent']['theme'],
@@ -173,7 +183,7 @@ $GLOBALS['TL_DCA']['tl_cookieconsent'] = array
 			'inputType'               => 'select',
 			'options'            	  => array ('block','edgeless','classic') ,
 			'reference'               => &$GLOBALS['TL_LANG']['tl_cookieconsent'],
-			'eval'                    => array('mandatory'=>false),
+			'eval'                    => array('mandatory'=>true),
 			'sql'                     => "varchar(128) NOT NULL default 'block'"
 		),
 
@@ -346,6 +356,15 @@ $GLOBALS['TL_DCA']['tl_cookieconsent'] = array
 			'sql'                     => "char(1) NOT NULL default ''"
 		),
 
+		'revokeBtn' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_cookieconsent']['revokeBtn'],
+			'default'				  => '<div class="cc-revoke {{classes}}">Cookie Policy</div>',
+			'inputType'               => 'textarea',
+			'eval'                    => array('preserveTags'=>true, 'allowHtml'=>true, 'class'=>'monospace', 'rte'=>'ace|html'),
+			'sql'                     => "mediumtext NULL"
+		),
+
 		'elementsheader' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_cookieconsent']['elementsheader'],
@@ -480,7 +499,7 @@ $GLOBALS['TL_DCA']['tl_cookieconsent'] = array
 			'eval'                    => array('preserveTags'=>true, 'allowHtml'=>true, 'class'=>'monospace', 'rte'=>'ace|html'),
 			'sql'                     => "mediumtext NULL"
 		)
-//revokeBtn
+
 	)
 );
 
@@ -499,7 +518,7 @@ class tl_cookieconsent extends Backend{
 
 		if (!$row['enabled'])
 		{
-			$icon = 'invisible.gif';
+			$icon = 'invisible.svg';
 		}
 
 		return '<a href="'.$this->addToUrl($href).'" title="'.StringUtil::specialchars($title).'"'.$attributes.'>'.Image::getHtml($icon, $label).'</a> ';
