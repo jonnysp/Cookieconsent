@@ -91,8 +91,8 @@ $GLOBALS['TL_DCA']['tl_cookieconsent'] = array
 	'palettes' => array
 	(
 		'__selector__'  => array('palette','showLink'),
-		'default'       => '{title_legend},title,enabled,loadposition,type,layout,position,theme;{colors},palette;{content},contentmessage,contentdismiss,contentallow,contentdeny,contentclose;{link},showLink;{settings},revokable,animateRevokable,static,location,regionalLaw;{elements},revokeBtn,elementsheader,elementsmessage,elementsmessagelink,elementsdismiss,elementsallow,elementsdeny,elementslink,elementsclose;{compliance},complianceinfo,complianceoptin,complianceoptout;{layouts},layoutsbasic,layoutsbasicclose,layoutsbasicheader;{wrapper},window',
-		'user'          => '{title_legend},title,enabled,loadposition,type,layout,position,theme;{colors},palette,popupbackground,popuptext,buttonbackground,buttontext,buttonborder;{content},contentmessage,contentdismiss,contentallow,contentdeny,contentclose;{link},showLink;{settings},revokable,animateRevokable,static,location,regionalLaw;{elements},revokeBtn,elementsheader,elementsmessage,elementsmessagelink,elementsdismiss,elementsallow,elementsdeny,elementslink,elementsclose;{compliance},complianceinfo,complianceoptin,complianceoptout;{compliance},layoutsbasic,layoutsbasicclose,layoutsbasicheader;{wrapper},window'
+		'default'       => '{title_legend},title,enabled,loadposition,type,layout,position,theme;{colors},palette;{content},contentheader,contentmessage,contentdismiss,contentallow,contentdeny,contentclose;{link},showLink;{settings},revokable,animateRevokable,static,location,regionalLaw;{elements},revokeBtn,elementsheader,elementsmessage,elementsmessagelink,elementsdismiss,elementsallow,elementsdeny,elementslink,elementsclose;{compliance},complianceinfo,complianceoptin,complianceoptout;{layouts},layoutsbasic,layoutsbasicclose,layoutsbasicheader;{wrapper},window',
+		'user'          => '{title_legend},title,enabled,loadposition,type,layout,position,theme;{colors},palette,popupbackground,popuptext,buttonbackground,buttontext,buttonborder;{content},contentheader,contentmessage,contentdismiss,contentallow,contentdeny,contentclose;{link},showLink;{settings},revokable,animateRevokable,static,location,regionalLaw;{elements},revokeBtn,elementsheader,elementsmessage,elementsmessagelink,elementsdismiss,elementsallow,elementsdeny,elementslink,elementsclose;{compliance},complianceinfo,complianceoptin,complianceoptout;{compliance},layoutsbasic,layoutsbasicclose,layoutsbasicheader;{wrapper},window'
 	
 	),
   
@@ -245,10 +245,20 @@ $GLOBALS['TL_DCA']['tl_cookieconsent'] = array
 			'eval'                    => array('maxlength'=>6, 'size'=>1, 'colorpicker'=>true, 'isHexColor'=>true, 'decodeEntities'=>true, 'tl_class'=>'w50 wizard'),
 			'sql'                     => "varchar(64) NOT NULL default ''"
 		),
-		
+
+		'contentheader' => array
+		(
+			'label'                   => &$GLOBALS['TL_LANG']['tl_cookieconsent']['contentheader'],
+			'default'				  => 'Cookies used on the website!',
+			'inputType'               => 'textarea',
+			'eval'                    => array('preserveTags'=>true,'allowHtml'=>true, 'class'=>'monospace', 'rte'=>'ace|html'),
+			'sql'                     => "mediumtext NULL"
+		),
+
 		'contentmessage' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_cookieconsent']['contentmessage'],
+			'default'				  => 'This website uses cookies to ensure you get the best experience on our website.',
 			'inputType'               => 'textarea',
 			'eval'                    => array('preserveTags'=>true,'allowHtml'=>true, 'class'=>'monospace', 'rte'=>'ace|html'),
 			'sql'                     => "mediumtext NULL"

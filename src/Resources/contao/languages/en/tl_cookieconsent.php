@@ -28,6 +28,7 @@ $GLOBALS['TL_LANG']['tl_cookieconsent']['popuplink'] 				= array('Linkfarbe','')
 $GLOBALS['TL_LANG']['tl_cookieconsent']['buttonbackground'] 		= array('Knopf Hintergrundfarbe','');
 $GLOBALS['TL_LANG']['tl_cookieconsent']['buttontext'] 				= array('Knopf Textfarbe','');
 $GLOBALS['TL_LANG']['tl_cookieconsent']['buttonborder'] 			= array('Knopf Rahmenfarbe','');
+$GLOBALS['TL_LANG']['tl_cookieconsent']['contentheader'] 			= array('Header','');
 $GLOBALS['TL_LANG']['tl_cookieconsent']['contentmessage'] 			= array('Mitteilung','');
 $GLOBALS['TL_LANG']['tl_cookieconsent']['contentallow'] 			= array('','');
 $GLOBALS['TL_LANG']['tl_cookieconsent']['contentdeny'] 				= array('','');

@@ -20,8 +20,6 @@ class ModuleCookieconsent extends Module {
 		$GLOBALS['TL_JAVASCRIPT'][] = 'bundles/jonnyspcookieconsent/cookieconsent.min.js';
 		$GLOBALS['TL_CSS'][] = 		  'bundles/jonnyspcookieconsent/cookieconsent.min.css';
 
-		$script = '';
-
 		$cookieconsent = \CookieconsentModel::findByPK($this->cookieconsent);
 
 		$settings['position']  = $cookieconsent->position;
@@ -114,6 +112,9 @@ class ModuleCookieconsent extends Module {
 		$settings['location']=boolval($cookieconsent->location);
 		$settings['law']['regionalLaw']=boolval($cookieconsent->regionalLaw);
 
+		//$settings['dismissOnScroll'] = false;
+		//$settings['dismissOnTimeout'] = false;
+		//$settings['autoOpen']= 1;
 
 		//elements
 
@@ -184,9 +185,7 @@ class ModuleCookieconsent extends Module {
 			$settings['window'] = $cookieconsent->window;
 		}
 
-		$script .= '<script>window.addEventListener("load", function(){	window.cookieconsent.initialise(';
-		$script .= json_encode($settings);
-		$script .= ')});</script>';
+		$script = '<script>window.addEventListener("load", function(){ window.cookieconsent.initialise('.json_encode($settings).')});</script>';
 
 		if($cookieconsent->loadposition == 'loadbottom'){
 			$GLOBALS['TL_BODY'][] = $script; // script on bottom
