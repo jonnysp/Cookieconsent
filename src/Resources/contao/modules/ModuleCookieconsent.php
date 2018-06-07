@@ -185,6 +185,7 @@ class ModuleCookieconsent extends Module {
 			$settings['window'] = $cookieconsent->window;
 		}
 
+		//$script = '<script>window.addEventListener("load", function(){ window.cookieconsent.initialise('.json_encode($settings,JSON_PRETTY_PRINT).')});</script>';
 		$script = '<script>window.addEventListener("load", function(){ window.cookieconsent.initialise('.json_encode($settings).')});</script>';
 
 		if($cookieconsent->loadposition == 'loadbottom'){
