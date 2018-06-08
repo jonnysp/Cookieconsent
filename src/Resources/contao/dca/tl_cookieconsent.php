@@ -304,6 +304,7 @@ $GLOBALS['TL_DCA']['tl_cookieconsent'] = array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_cookieconsent']['showLink'],
 			'inputType'               => 'checkbox',
+			'eval'                    => array('submitOnChange'=>true),
 			'eval'                    => array(),
 			'sql'                     => "char(1) NOT NULL default ''"
 		),
