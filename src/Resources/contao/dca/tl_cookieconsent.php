@@ -378,7 +378,7 @@ $GLOBALS['TL_DCA']['tl_cookieconsent'] = array
 		'elementsheader' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_cookieconsent']['elementsheader'],
-			'default'				  => '<span class="cc-header">{{header}}</span>&nbsp;',
+			'default'				  => '<span class="cc-header">{{header}}</span>',
 			'inputType'               => 'textarea',
 			'eval'                    => array('preserveTags'=>true, 'allowHtml'=>true, 'class'=>'monospace', 'rte'=>'ace|html'),
 			'sql'                     => "mediumtext NULL"
